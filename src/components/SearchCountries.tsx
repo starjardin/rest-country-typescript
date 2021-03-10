@@ -22,7 +22,7 @@ const SearchCountries = () => {
         <InputStyels
           type="text"
           placeholder="Search for a country..."
-          onChange={ ( e: React.FormEvent<HTMLInputElement> ) => searchFunction() }
+          onChange={ searchFunction }
         />
       </form>
     </div>

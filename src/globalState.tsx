@@ -1,27 +1,52 @@
 import React, { createContext, useEffect, useReducer } from 'react'
 import axios from 'axios'
-//*GlobalContext declaration
 
 //*Action type
-interface Action {
-  type: "fetchData" | "searchByName",
-  payload: [],
-  search?: string,
+type Action =
+  | { type: "fetchData", payload: [] }
+  | { type: "searchByName", payload: string, search?: string }
+
+export type Country = {
+  country: {
+    name: string,
+    topLevelDomain: string[],
+    alpha2Code: string,
+    alpha3Code: string,
+    callingCodes: number[],
+    capital: string,
+    altSpellings: string[],
+    region: string,
+    subregion: string,
+    population: number,
+    latlng: number[],
+    demonym: string,
+    area: number,
+    gini: number,
+    timezones: string,
+    borders: string[],
+    nativeName: string,
+    numericCode: string,
+    currencies: object[],
+    languages: object[],
+    cioc: string,
+    flag: string,
+  }
 }
+
 
 //*State type
 interface State {
   isLoading: boolean,
   countries: [],
-  searchByName?: string
+  searchByName: string
 }
 
 //* initial state type
 interface initialStateTye {
   isLoading: boolean,
   countries: [],
-  searchByName?: string
-  searchFunction : () => void
+  searchByName: string
+  searchFunction: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 //* initial state
@@ -29,9 +54,10 @@ const initialState: initialStateTye = {
   isLoading: true,
   countries: [],
   searchByName: '',
-  searchFunction : () => {},
+  searchFunction : () => {}
 }
 
+//*GlobalContext declaration
 export const GlobalContext = createContext(initialState)
 
 //* Reducer function
@@ -48,7 +74,7 @@ const reducer = ( state: State, action: Action ) => {
     case "searchByName": {
       return {
         ...state,
-        searchByName: action.search
+        searchByName: action.payload
       }
      }
     default: return state
@@ -77,9 +103,9 @@ export const ContextProvider: React.FC = ( { children } ) => {
       isLoading: state.isLoading,
       countries: state.countries,
       searchByName: state.searchByName,
-      searchFunction: () => dispatch( {
+      searchFunction: (e) => dispatch( {
         type: "searchByName",
-        payload: []
+        payload: e.target.value
       } )
     } }>
       { children }

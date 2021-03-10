@@ -1,15 +1,21 @@
 import React from 'react';
+import { Route, Switch } from 'react-router';
 
 import Header from './components/Header';
 import Home from './components/Home';
-import SearchCountries from './components/SearchCountries';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <SearchCountries />
-      <Home />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="///">
+          skasdf
+        </Route>
+      </Switch>
     </div>
   );
 }

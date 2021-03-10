@@ -1,0 +1,33 @@
+// first how can I fetch the api
+1 I am going to use reducer of course, useContext may(hahah);
+  here my state is living(state and dispatch)
+  
+2 - need a globalState file
+  reducer function, provierComponent. (export them)
+  
+3 - import and set the globalState up in the index.tsx file.
+  
+//MainComponentUl > ComponentLi click on the element(
+  fetch again to the countries details
+  back button to the home page
+  borders goes to the bordersCountryDetails {
+    fetch again here. I think
+    back to home page
+  }
+)
+
+3 - SearchComponent
+ 
+4 - filterComponent
+
+async fetchData () {  
+  const res = awaitfetch(url)
+  const data = res.json()
+  country = data.data
+}
+
+fetchData () {
+  axios.get(url).then(() => {
+    
+  })
+}

@@ -1,44 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-interface Country {
-  country: {
-    name: string,
-    topLevelDomain: string[],
-    alpha2Code: string,
-    alpha3Code: string,
-    callingCodes: number[],
-    capital: string,
-    altSpellings: string[],
-    region: string,
-    subregion: string,
-    population: number,
-    latlng: number[],
-    demonym: string,
-    area: number,
-    gini: number,
-    timezones: string,
-    borders: string[],
-    nativeName: string,
-    numericCode: string,
-    currencies: object[],
-    languages: object[],
-    cioc: string,
-    flag: string,
-  }
-}
-
-const CountryList: React.FC<Country> = ( { country } ) => {
+import { Country } from '../globalState'
+const CountryList = ( { country }: Country ) => {
   
   return (
-    <li>
-      <div>
-        <img src={country.flag} alt="flag"/>
-        <h4>{ country.name }</h4>
-        <p>Population: { country.population }</p>
-        <p>Region: { country.region }</p>
-        <p>Capital: { country.capital }</p>
-      </div>
-    </li>
+    <Link to="/">
+      <li>
+        <div>
+          <img src={country.flag} alt="flag"/>
+          <h4>{ country.name }</h4>
+          <p>Population: { country.population }</p>
+          <p>Region: { country.region }</p>
+          <p>Capital: { country.capital }</p>
+        </div>
+      </li>
+    </Link>
   );
 }
 
