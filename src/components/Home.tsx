@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import CountryList from './CountryList'
-import { GlobalContext } from '../globalState'
+import { GlobalContext } from '../context/globalState'
 import SearchCountries from './SearchCountries';
 
 type Country = {
@@ -9,8 +9,9 @@ type Country = {
 }
 
 const Home = () => {
-  const { countries, isLoading, searchByName } = useContext( GlobalContext )
-  const searchByNameToLowerCase = searchByName.toLowerCase()
+  const { state } = useContext( GlobalContext )
+  const { countries, isLoading, searchByName } = state
+   const searchByNameToLowerCase = searchByName.toLowerCase()
   
   return (
     <div>

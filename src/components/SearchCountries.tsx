@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components'
 
-import { GlobalContext } from '../globalState';
+import { GlobalContext } from '../context/globalState';
 
-const InputStyels = styled.input`
+const InputStyles = styled.input`
   border: none;
   padding: .4rem 1rem;
   box-shadow: 0 0 1px #ccc;
@@ -13,16 +13,26 @@ const InputStyels = styled.input`
   }
 `
 const SearchCountries = () => {
-  const { searchFunction } = useContext( GlobalContext )
+  const { dispatch } = useContext( GlobalContext )
+
+  const onChangeFunction = (e: React.FormEvent<HTMLInputElement>) => {
+    const newValue = e.currentTarget.value;
+    dispatch({
+      type: 'searchByName',
+      payload: newValue
+    })
+  }
   
-  //TODO : need a funtion to fiter the stuff here.
+  //TODO : need a function to filter the stuff here.
   return (
     <div>
       <form action="#">
-        <InputStyels
+        <InputStyles
           type="text"
+          name="searchInput"
+          id="searchInput"
           placeholder="Search for a country..."
-          onChange={ searchFunction }
+          onChange={ (e) => onChangeFunction(e) }
         />
       </form>
     </div>

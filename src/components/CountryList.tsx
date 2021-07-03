@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Country } from '../globalState'
-const CountryList = ( { country }: Country ) => {
+import { CountryType } from '../interfaces'
+const CountryList = ( { country }: CountryType ) => {
   
   return (
     <Link to="/">
