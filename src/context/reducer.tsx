@@ -8,14 +8,17 @@ export const reducer = ( state: StateType, action: Action ) => {
         isLoading: false,
         countries: action.payload
       }
-      //! here is the fetch when the app first loading
     }
     case "searchByName": {
-      console.log(action.payload);
-      
       return {
         ...state,
         searchByName: action.payload
+      }
+     }
+    case "SELECT_A_REGION": {
+      return {
+        ...state,
+        region: action.payload
       }
      }
     default: return state

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components'
 
 import { GlobalContext } from '../context/globalState';
+import Select from './Select';
 
 const InputStyles = styled.input`
   border: none;
@@ -11,6 +12,12 @@ const InputStyles = styled.input`
   &:focus {
     outline: none;
   }
+`
+
+const FormStyles = styled.form`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `
 const SearchCountries = () => {
   const { dispatch } = useContext( GlobalContext )
@@ -23,10 +30,8 @@ const SearchCountries = () => {
     })
   }
   
-  //TODO : need a function to filter the stuff here.
   return (
-    <div>
-      <form action="#">
+      <FormStyles action="#">
         <InputStyles
           type="text"
           name="searchInput"
@@ -34,9 +39,11 @@ const SearchCountries = () => {
           placeholder="Search for a country..."
           onChange={ (e) => onChangeFunction(e) }
         />
-      </form>
-    </div>
+        <Select />
+      </FormStyles>
   );
 }
+
+
 
 export default SearchCountries;

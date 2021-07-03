@@ -3,12 +3,14 @@ export interface initialStateType {
   isLoading: boolean,
   countries: [],
   searchByName: string
+  region: string
 }
 
 //*Action type
 export type Action =
   | { type: "fetchData", payload: [] }
   | { type: "searchByName", payload: string, search?: string }
+  | { type: "SELECT_A_REGION", payload: string }
 
 
 export interface CountryType {
@@ -43,4 +45,5 @@ export interface StateType {
   isLoading: boolean,
   countries: [],
   searchByName: string
+  region: string
 }

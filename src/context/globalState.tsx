@@ -9,6 +9,7 @@ const initialState: initialStateType = {
   isLoading: true,
   countries: [],
   searchByName: '',
+  region: ''
 }
 
 //*GlobalContext declaration
