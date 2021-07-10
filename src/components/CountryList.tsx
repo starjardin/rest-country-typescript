@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-import { CountryType } from '../interfaces'
+import { CountriesType } from '../interfaces'
 
 const ListStyles = styled.li`
   list-style: none;
@@ -9,22 +10,25 @@ const ListStyles = styled.li`
   padding: 0;
   img {
     width: 100%;
-    hight: auto;
+    hight: 100%;
   }
 `
-
-const CountryList = ( { country }: CountryType ) => {
+const Card = styled.div`
   
+`
+
+const CountryList: FC<{country: CountriesType }> = ({country}) => {
+
   return (
-    <Link to="/">
+    <Link to={`/country/${country.capital}`}>
       <ListStyles>
-        <div>
+        <Card>
           <img src={country.flag} alt="flag"/>
           <h4>{ country.name }</h4>
           <p>Population: { country.population }</p>
           <p>Region: { country.region }</p>
           <p>Capital: { country.capital }</p>
-        </div>
+        </Card>
       </ListStyles>
     </Link>
   );

@@ -1,10 +1,19 @@
 //* initial state type
 export interface initialStateType {
   isLoading: boolean,
-  countries: [],
+  countries: CountriesType[],
   searchByName: string
   region: string
 }
+
+export interface CurrenciesType {
+  name: string,
+}
+
+export interface LanguagesType {
+  name: string,
+}
+
 
 //*Action type
 export type Action =
@@ -13,37 +22,35 @@ export type Action =
   | { type: "SELECT_A_REGION", payload: string }
 
 
-export interface CountryType {
-  country: {
-    name: string,
-    topLevelDomain: string[],
-    alpha2Code: string,
-    alpha3Code: string,
-    callingCodes: number[],
-    capital: string,
-    altSpellings: string[],
-    region: string,
-    subregion: string,
-    population: number,
-    latlng: number[],
-    demonym: string,
-    area: number,
-    gini: number,
-    timezones: string,
-    borders: string[],
-    nativeName: string,
-    numericCode: string,
-    currencies: object[],
-    languages: object[],
-    cioc: string,
-    flag: string,
-  }
+export interface CountriesType {
+  alpha2Code: string,
+  alpha3Code: string,
+  area: number,
+  altSpellings: string[],
+  borders: string[],
+  callingCodes: number[],
+  capital: string,
+  cioc: string,
+  currencies: CurrenciesType[],
+  demonym: string,
+  flag: string,
+  gini: number,
+  languages: LanguagesType[],
+  latlng: number[],
+  name: string,
+  nativeName: string,
+  numericCode: string,
+  population: number,
+  region: string,
+  subregion: string,
+  timezones: string,
+  topLevelDomain: string[],
 }
 
 //*State type
 export interface StateType {
   isLoading: boolean,
-  countries: [],
+  countries: CountriesType[],
   searchByName: string
   region: string
 }

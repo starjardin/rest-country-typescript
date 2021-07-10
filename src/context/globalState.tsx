@@ -46,7 +46,3 @@ export const ContextProvider: React.FC = ( { children } ) => {
     </GlobalContext.Provider>
   )
 }
-
-// isLoading: state.isLoading,
-//       countries: state.countries,
-//       searchByName: state.searchByName,

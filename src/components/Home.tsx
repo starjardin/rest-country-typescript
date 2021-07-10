@@ -4,10 +4,7 @@ import CountryList from './CountryList'
 import { GlobalContext } from '../context/globalState'
 import SearchCountries from './SearchCountries';
 import styled from 'styled-components';
-
-type Country = {
-  name: string
-}
+import {CountriesType} from '../interfaces'
 
 const CountryLayout = styled.ul`
   display: grid;
@@ -18,19 +15,17 @@ const CountryLayout = styled.ul`
 const Home = () => {
   const { state } = useContext( GlobalContext )
   const { countries, isLoading, searchByName, region } = state
-  console.log(countries);
-  
-  
+
    const searchByNameToLowerCase = searchByName.toLowerCase()
 
    const listOfCountries =  countries.length &&
     countries
-    .filter( ( item: Country ) => item.name
+    .filter( ( item: CountriesType ) => item.name
       .toLowerCase()
       .includes( searchByNameToLowerCase ) )
-    .filter((el: any) => el.region === region)
+    .filter((el: CountriesType) => region ? el.region === region : el)
     .map( ( country, index ) => (
-      <CountryList country={country} key={index}  />
+      <CountryList country ={country} key={index}  />
     ) 
   )
             
