@@ -10,7 +10,7 @@ const ListStyles = styled.li`
   padding: 0;
   img {
     width: 100%;
-    hight: 100%;
+    height: auto;
   }
 `
 const Card = styled.div`
@@ -20,7 +20,7 @@ const Card = styled.div`
 const CountryList: FC<{country: CountriesType }> = ({country}) => {
 
   return (
-    <Link to={`/country/${country.capital}`}>
+    <Link to={`/country/${country.alpha3Code}`}>
       <ListStyles>
         <Card>
           <img src={country.flag} alt="flag"/>

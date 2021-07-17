@@ -1,16 +1,31 @@
 import { useContext } from 'react';
 import styled from 'styled-components'
+import {IoSearchSharp} from 'react-icons/io5'
 
 import { GlobalContext } from '../context/globalState';
 import Select from './Select';
 
 const InputStyles = styled.input`
   border: none;
-  padding: .4rem 1rem;
-  box-shadow: 0 0 1px #ccc;
+  padding: 0rem 4rem;
+  box-shadow: 0 0 1px 2px #f4f4f4;
+  border-radius: 3px;
+  width: 100%;
   
   &:focus {
     outline: none;
+    box-shadow: 0 0 1px 2px #141414;
+  }
+`
+
+const SearchContainer = styled.div`
+  position: relative;
+  display: flex;
+  span {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-40%);
   }
 `
 
@@ -32,13 +47,19 @@ const SearchCountries = () => {
   
   return (
       <FormStyles action="#">
-        <InputStyles
-          type="text"
-          name="searchInput"
-          id="searchInput"
-          placeholder="Search for a country..."
-          onChange={ (e) => onChangeFunction(e) }
-        />
+        <SearchContainer>
+          <span>
+            <IoSearchSharp />
+          </span>
+          <InputStyles
+            type="text"
+            name="searchInput"
+            id="searchInput"
+            placeholder="Search for a country..."
+            onChange={ (e) => onChangeFunction(e) }
+            autoComplete='off'
+          />
+        </SearchContainer>
         <Select />
       </FormStyles>
   );

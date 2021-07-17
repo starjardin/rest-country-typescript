@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components'
 
 
@@ -6,6 +5,8 @@ const HeaderStyles = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #ffffff;
+  border-bottom: 3px solid #f6f6f6;
 `
 const Header = () => {
   return (

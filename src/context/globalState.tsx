@@ -27,11 +27,11 @@ export const ContextProvider: React.FC = ( { children } ) => {
   
   function fetchAllCountry () {
     axios( `https://restcountries.eu/rest/v2/all` ).then( ( results ) => {
-      dispatch( {
-        type: "fetchData",
-        payload: results.data
-      } )
-      })
+    dispatch( {
+      type: "fetchData",
+      payload: results.data
+    } )
+    })
   }
   
   useEffect( () => {
