@@ -1,134 +1,159 @@
-import { useContext } from "react"
-import { Link, useParams } from "react-router-dom"
-import styled from "styled-components"
-import {BsArrowLeft} from 'react-icons/bs'
+import { useContext, FC } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { BsArrowLeft } from 'react-icons/bs'
 
-
-import { GlobalContext } from "../context/globalState"
-import {CountriesType, CurrenciesType, LanguagesType} from '../interfaces'
+import { GlobalContext } from '../context/globalState'
+import {
+	CountriesType,
+	CurrenciesType,
+	LanguagesType,
+	DarkMode,
+} from '../interfaces'
 
 interface capitalType {
-  alpha3Code: string
+	alpha3Code: string
 }
 
-const CountryDetailsStyles = styled.div`
-  display: flex;
-  gap: 10%;
+const CountryDetailsStyles = styled.div<DarkMode>`
+	display: flex;
+	gap: 10%;
+	background-color: ${({ darkMode }) => (darkMode ? '#000' : '#fafafa')};
 
-  img {
-    width: 100%;
-    height: 100%;
-  }
+	img {
+		width: 100%;
+		height: 100%;
+	}
+`
+
+const CountryDetailsContainer = styled.div<DarkMode>`
+	background-color: ${({ darkMode }) => (darkMode ? '#000' : '#fafafa')};
+	width: 100%;
+	height: 100vh;
 `
 
 const FlagContainer = styled.div`
-  flex-basis: 40%;
+	flex-basis: 40%;
 `
 
 const TextContainer = styled.div`
-  flex-basis: 60%;
+	flex-basis: 60%;
 `
 
-const TextWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10%;
+const TextWrapper = styled.div<DarkMode>`
+	display: flex;
+	align-items: center;
+	gap: 10%;
+	color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
 `
 
 const BordersButtonStyles = styled.button`
-  cursor: pointer;
-  padding: 5px 16px;
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 1px 1px #c1c1cd;
-  cursor: pointer;
-  margin: 5px 5px;
+	cursor: pointer;
+	padding: 5px 16px;
+	background-color: #fff;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0 1px 1px #c1c1cd;
+	cursor: pointer;
+	margin: 5px 5px;
 `
 
 const CountryName = styled.h3`
-  font-size: 32px;
-  font-weight: 700;
+	font-size: 32px;
+	font-weight: 700;
 `
 
-
 export default function CountryDetails() {
-  const {alpha3Code} : capitalType = useParams()
-  const {state: {countries}} = useContext(GlobalContext)
-  
-  const country = countries.find((el: CountriesType) => el.alpha3Code === alpha3Code)
-  
-  const languages = country?.languages.map((item: LanguagesType) => <span key={item.name}> {item.name} </span>)
-  const currencies = country?.currencies.map((item: CurrenciesType) => <span key={item.name}> {item.name} </span>)
+	const { alpha3Code }: capitalType = useParams()
+	const {
+		state: { countries, darkMode },
+	} = useContext(GlobalContext)
 
-  const borders = country?.borders.map((item: string) => (
-    <Link to={`/country/${item}`} key={item}>
-      <BordersButtonStyles> {
-        countries.find(e => e.alpha3Code === item)?.name
-      } </BordersButtonStyles>
-    </Link>
-  ))        
+	const country = countries.find(
+		(el: CountriesType) => el.alpha3Code === alpha3Code
+	)
 
-  return (
-    <>
-      <BackButton />
-      <CountryDetailsStyles>
-        <FlagContainer>
-          <img src={ country?.flag} alt={ country?.name}/>
-        </FlagContainer>
-        <TextContainer>
-          <TextWrapper>
-            <div>
-              <CountryName>{ country?.name}</CountryName>
-              <p>Native name: { country?.nativeName}</p>
-              <p>Population: { country?.population}</p>
-              <p>Region: { country?.region}</p>
-              <p>Sub region: { country?.subregion}</p>
-              <p>Capital: { country?.capital}</p>
-            </div>
+	const languages = country?.languages.map((item: LanguagesType) => (
+		<span key={item.name}> {item.name} </span>
+	))
+	const currencies = country?.currencies.map((item: CurrenciesType) => (
+		<span key={item.name}> {item.name} </span>
+	))
 
-            <div>
-              <p>Top level domain: {country?.topLevelDomain}</p>
-              <p>Currencies: {currencies}</p>
-              <p>Languages: {languages}</p>
-            </div>
+	const borders = country?.borders.map((item: string) => (
+		<Link to={`/country/${item}`} key={item}>
+			<BordersButtonStyles>
+				{' '}
+				{countries.find((e) => e.alpha3Code === item)?.name}{' '}
+			</BordersButtonStyles>
+		</Link>
+	))
 
-          </TextWrapper>
+	return (
+		<CountryDetailsContainer darkMode={darkMode}>
+			<BackButton darkMode={darkMode} />
+			<CountryDetailsStyles darkMode={darkMode}>
+				<FlagContainer>
+					<img src={country?.flag} alt={country?.name} />
+				</FlagContainer>
+				<TextContainer>
+					<TextWrapper darkMode={darkMode}>
+						<div>
+							<CountryName>{country?.name}</CountryName>
+							<p>Native name: {country?.nativeName}</p>
+							<p>Population: {country?.population}</p>
+							<p>Region: {country?.region}</p>
+							<p>Sub region: {country?.subregion}</p>
+							<p>Capital: {country?.capital}</p>
+						</div>
 
-          <div>
-            <p>Border countries: {borders}</p>
-          </div>
-        </TextContainer>
-      </CountryDetailsStyles>
-    </>
-  )
+						<div>
+							<p>Top level domain: {country?.topLevelDomain}</p>
+							<p>Currencies: {currencies}</p>
+							<p>Languages: {languages}</p>
+						</div>
+					</TextWrapper>
+
+					<div>
+						<p>Border countries: {borders}</p>
+					</div>
+				</TextContainer>
+			</CountryDetailsStyles>
+		</CountryDetailsContainer>
+	)
 }
 
-const BackButton = () => {
-  return (
-    <ButtonStyles>
-      <Link to='/'>
-        <BsArrowLeft/> <span>Back</span>
-      </Link>
-    </ButtonStyles>
-  )
+const BackButton: FC<DarkMode> = ({ darkMode }) => {
+	return (
+		<BackButtonWrapper darkMode={darkMode}>
+			<ButtonStyles darkMode={darkMode}>
+				<Link to='/'>
+					<BsArrowLeft /> <span>Back</span>
+				</Link>
+			</ButtonStyles>
+		</BackButtonWrapper>
+	)
 }
 
+const BackButtonWrapper = styled.div<DarkMode>`
+	padding: 4rem 0;
+	background-color: ${({ darkMode }) => (darkMode ? '#111' : '#fff')};
+`
 
-const ButtonStyles = styled.button`
-  padding: 5px 16px;
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 1px 2px #c1c1cd;
-  cursor: pointer;
-  margin: 4rem 0;
+const ButtonStyles = styled.button<DarkMode>`
+	padding: 5px 16px;
+	background-color: ${({ darkMode }) => (darkMode ? '#111' : '#fff')};
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0 1px 2px #c1c1cd;
+	cursor: pointer;
+	margin: 0;
 
-  a {
-    text-decoration: none;
-    color: #111;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+	a {
+		text-decoration: none;
+		color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
 `
