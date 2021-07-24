@@ -4,9 +4,17 @@ export const DropDown = styled.div`
 	position: relative;
 `
 
-export const FieldsetStyles = styled.fieldset<{ openDropDown: boolean }>`
+interface FieldsetProps {
+	darkMode: boolean
+	openDropDown: boolean
+}
+
+export const FieldsetStyles = styled.fieldset<FieldsetProps>`
 	border-radius: 5px;
-	border: solid 2px #c4c4c4;
+	border-color: transparent;
+	position: relative;
+	min-width: 200px;
+	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
 	max-width: 436px;
 	padding: 16px 20px;
 	margin: 0;

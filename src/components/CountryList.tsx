@@ -7,7 +7,10 @@ import { GlobalContext } from '../context/globalState'
 
 const ListStyles = styled.li<DarkMode>`
 	list-style: none;
-	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#eeeeee')};
+	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
+	box-shadow: 0 0 3px 2px
+		${({ darkMode }) => (darkMode ? '#2B3743' : '#F3FAFF')};
+	border-radius: 5px;
 	padding: 0;
 	img {
 		width: 100%;

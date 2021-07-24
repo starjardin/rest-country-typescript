@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { BsArrowLeft } from 'react-icons/bs'
 
 import { GlobalContext } from '../context/globalState'
+import { AppContainer } from '../GlobalStyles'
 import {
 	CountriesType,
 	CurrenciesType,
@@ -18,7 +19,7 @@ interface capitalType {
 const CountryDetailsStyles = styled.div<DarkMode>`
 	display: flex;
 	gap: 10%;
-	background-color: ${({ darkMode }) => (darkMode ? '#000' : '#fafafa')};
+	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fafafa')};
 
 	img {
 		width: 100%;
@@ -27,8 +28,8 @@ const CountryDetailsStyles = styled.div<DarkMode>`
 `
 
 const CountryDetailsContainer = styled.div<DarkMode>`
-	background-color: ${({ darkMode }) => (darkMode ? '#000' : '#fafafa')};
-	width: 100%;
+	${AppContainer};
+	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fafafa')};
 	height: 100vh;
 `
 
@@ -47,13 +48,13 @@ const TextWrapper = styled.div<DarkMode>`
 	color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
 `
 
-const BordersButtonStyles = styled.button`
+const BordersButtonStyles = styled.button<DarkMode>`
 	cursor: pointer;
 	padding: 5px 16px;
 	background-color: #fff;
 	border: none;
 	border-radius: 5px;
-	box-shadow: 0 0 1px 1px #c1c1cd;
+	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#fafafa')};
 	cursor: pointer;
 	margin: 5px 5px;
 `
@@ -82,8 +83,7 @@ export default function CountryDetails() {
 
 	const borders = country?.borders.map((item: string) => (
 		<Link to={`/country/${item}`} key={item}>
-			<BordersButtonStyles>
-				{' '}
+			<BordersButtonStyles darkMode={darkMode}>
 				{countries.find((e) => e.alpha3Code === item)?.name}{' '}
 			</BordersButtonStyles>
 		</Link>
@@ -114,9 +114,9 @@ export default function CountryDetails() {
 						</div>
 					</TextWrapper>
 
-					<div>
+					<TextWrapper darkMode={darkMode}>
 						<p>Border countries: {borders}</p>
-					</div>
+					</TextWrapper>
 				</TextContainer>
 			</CountryDetailsStyles>
 		</CountryDetailsContainer>
@@ -137,12 +137,12 @@ const BackButton: FC<DarkMode> = ({ darkMode }) => {
 
 const BackButtonWrapper = styled.div<DarkMode>`
 	padding: 4rem 0;
-	background-color: ${({ darkMode }) => (darkMode ? '#111' : '#fff')};
+	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fff')};
 `
 
 const ButtonStyles = styled.button<DarkMode>`
 	padding: 5px 16px;
-	background-color: ${({ darkMode }) => (darkMode ? '#111' : '#fff')};
+	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fff')};
 	border: none;
 	border-radius: 5px;
 	box-shadow: 0 0 1px 2px #c1c1cd;
@@ -151,7 +151,7 @@ const ButtonStyles = styled.button<DarkMode>`
 
 	a {
 		text-decoration: none;
-		color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
+		color: ${({ darkMode }) => (darkMode ? '#fff' : '#212E37')};
 		display: flex;
 		align-items: center;
 		gap: 4px;

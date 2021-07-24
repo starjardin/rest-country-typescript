@@ -22,6 +22,7 @@ const HeaderStyles = styled.div<DarkMode>`
 const DarkModeStyles = styled.button<DarkMode>`
 	cursor: pointer;
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
+	color: ${({ darkMode }) => (darkMode ? '#FEFFFD' : '#111518')};
 	padding: 10px;
 	border: none;
 	&:focus {

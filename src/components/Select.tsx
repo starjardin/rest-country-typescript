@@ -3,11 +3,12 @@ import styled from 'styled-components'
 
 import { GlobalContext } from '../context/globalState'
 import { DropDown, FieldsetStyles } from '../styles/SelectStyles'
+import { DarkMode } from '../interfaces'
 
 export default function Select() {
 	const [openDropDown, setOpenDropDown] = useState(false)
 	const {
-		state: { countries },
+		state: { countries, darkMode },
 		dispatch,
 	} = useContext(GlobalContext)
 	const [selectedRegion, setSelectedRegion] = useState('')
@@ -20,7 +21,6 @@ export default function Select() {
 		setOpenDropDown(!openDropDown)
 	}
 
-	// function handleCategory(e: React.MouseEvent<HTMLElement>) {
 	function handleCategory(e: any) {
 		setSelectedRegion(e.currentTarget.dataset.value)
 		dispatch({
@@ -36,19 +36,20 @@ export default function Select() {
 		: 'Find a region'
 
 	return (
-		<FieldsetStyles openDropDown={openDropDown}>
+		<FieldsetStyles darkMode={darkMode} openDropDown={openDropDown}>
 			<DropDown onClick={toggleOpen}>
 				<CustomSelect openDropDown={openDropDown}>
 					<CustomSelectTrigger>
-						<span data-value={''} onClick={(e) => handleCategory(e)}>
+						<span onClick={(e) => handleCategory(e)}>
 							{customSelectTriggerValue}
 						</span>
 						<Arrow openDropDown={openDropDown} />
 					</CustomSelectTrigger>
 					{openDropDown && (
-						<CustomOptions>
-							{uniqueRegions.map((el: any, index) => (
+						<CustomOptions darkMode={darkMode}>
+							{uniqueRegions.map((el: string, index) => (
 								<CustomOption
+									darkMode={darkMode}
 									key={index}
 									data-value={el}
 									onClick={(e) => handleCategory(e)}>
@@ -64,7 +65,6 @@ export default function Select() {
 }
 
 const CustomSelectTrigger = styled.div`
-	position: relative;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
@@ -72,9 +72,9 @@ const CustomSelectTrigger = styled.div`
 	text-transform: capitalize;
 	color: #c4c4c4;
 `
-
 const CustomSelect = styled.div<{ openDropDown?: boolean }>``
-const CustomOption = styled.span`
+
+const CustomOption = styled.span<DarkMode>`
 	display: block;
 	font-size: 16px;
 	font-weight: normal;
@@ -83,9 +83,8 @@ const CustomOption = styled.span`
 	text-align: left;
 	transition: all 0.5s;
 	border-radius: 5px;
-	color: #34394f;
-	padding: 0 16px;
-	position: relative;
+	color: ${({ darkMode }) => (darkMode ? '#FFFEFF' : '#34394f')};
+	padding: 5px 16px;
 	cursor: pointer;
 	&:hover {
 		cursor: pointer;
@@ -94,8 +93,12 @@ const CustomOption = styled.span`
 		background-color: #e9e9e9;
 	}
 `
-const CustomOptions = styled.div`
+const CustomOptions = styled.div<DarkMode>`
 	position: absolute;
+	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
+	top: 300%;
+	left: 0%;
+	width: 100%;
 `
 const Arrow = styled.div<{ openDropDown: boolean }>`
 	position: relative;
