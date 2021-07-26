@@ -11,7 +11,10 @@ const initialState: StateType = {
 	searchByName: '',
 	region: '',
 	darkMode: false,
+	openDropDown: false,
 }
+
+export const lgViewport = '820px'
 
 //*GlobalContext declaration
 export const GlobalContext = createContext<{

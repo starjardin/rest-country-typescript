@@ -6,9 +6,8 @@ import { DropDown, FieldsetStyles } from '../styles/SelectStyles'
 import { DarkMode } from '../interfaces'
 
 export default function Select() {
-	const [openDropDown, setOpenDropDown] = useState(false)
 	const {
-		state: { countries, darkMode },
+		state: { countries, darkMode, openDropDown },
 		dispatch,
 	} = useContext(GlobalContext)
 	const [selectedRegion, setSelectedRegion] = useState('')
@@ -17,9 +16,7 @@ export default function Select() {
 	)
 	const uniqueRegions = Array.from(new Set(regions))
 
-	function toggleOpen() {
-		setOpenDropDown(!openDropDown)
-	}
+	const toggleOpen = () => dispatch({ type: 'OPEN_DROP_DOWN' })
 
 	function handleCategory(e: any) {
 		setSelectedRegion(e.currentTarget.dataset.value)
@@ -36,8 +33,11 @@ export default function Select() {
 		: 'Find a region'
 
 	return (
-		<FieldsetStyles darkMode={darkMode} openDropDown={openDropDown}>
-			<DropDown onClick={toggleOpen}>
+		<FieldsetStyles
+			darkMode={darkMode}
+			openDropDown={openDropDown}
+			onClick={toggleOpen}>
+			<DropDown>
 				<CustomSelect openDropDown={openDropDown}>
 					<CustomSelectTrigger>
 						<span onClick={(e) => handleCategory(e)}>
@@ -72,7 +72,9 @@ const CustomSelectTrigger = styled.div`
 	text-transform: capitalize;
 	color: #c4c4c4;
 `
-const CustomSelect = styled.div<{ openDropDown?: boolean }>``
+const CustomSelect = styled.div<{ openDropDown?: boolean }>`
+	padding: 0.3rem 0.3rem;
+`
 
 const CustomOption = styled.span<DarkMode>`
 	display: block;
@@ -97,7 +99,8 @@ const CustomOptions = styled.div<DarkMode>`
 	position: absolute;
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
 	top: 300%;
-	left: 0%;
+	left: -20px;
+	padding: 20px;
 	width: 100%;
 `
 const Arrow = styled.div<{ openDropDown: boolean }>`
@@ -116,7 +119,7 @@ const Arrow = styled.div<{ openDropDown: boolean }>`
 	}
 
 	&::before {
-		left: ${({ openDropDown }) => (openDropDown ? '3px' : '3px')};
+		left: 3px;
 		transform: rotate(
 			${({ openDropDown }) => (openDropDown ? '-45deg' : '45deg')}
 		);
@@ -124,7 +127,7 @@ const Arrow = styled.div<{ openDropDown: boolean }>`
 	}
 
 	&::after {
-		left: ${({ openDropDown }) => (openDropDown ? '3px' : '-3px')};
+		left: -3px;
 		transform: rotate(
 			${({ openDropDown }) => (openDropDown ? '45deg' : '-45deg')}
 		);

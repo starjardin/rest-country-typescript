@@ -17,7 +17,11 @@ export const FieldsetStyles = styled.fieldset<FieldsetProps>`
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
 	max-width: 436px;
 	padding: 16px 20px;
-	margin: 0;
+
+	@media (max-width: 820px) {
+		margin: 16px 0;
+	}
+
 	&.focus {
 		border: solid 2px #34394f;
 

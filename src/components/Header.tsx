@@ -15,6 +15,8 @@ const HeaderStyles = styled.div<DarkMode>`
 	border-bottom: 3px solid
 		${({ darkMode }) => (darkMode ? '#111518' : '#fafafa')};
 	h2 {
+		font-weight: 800;
+		font-size: 2rem;
 		color: ${({ darkMode }) => (darkMode ? '#FEFFFD' : '#111518')};
 	}
 `
@@ -25,6 +27,11 @@ const DarkModeStyles = styled.button<DarkMode>`
 	color: ${({ darkMode }) => (darkMode ? '#FEFFFD' : '#111518')};
 	padding: 10px;
 	border: none;
+	font-size: 1.5rem;
+	font-weight: 300;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 	&:focus {
 		outline: none;
 	}

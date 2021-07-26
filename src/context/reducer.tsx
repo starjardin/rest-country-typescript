@@ -27,6 +27,18 @@ export const reducer = (state: StateType, action: Action) => {
 				darkMode: !state.darkMode,
 			}
 		}
+		case 'OPEN_DROP_DOWN': {
+			return {
+				...state,
+				openDropDown: !state.openDropDown,
+			}
+		}
+		case 'ClOSE_DROP_DOWN': {
+			return {
+				...state,
+				openDropDown: !state.openDropDown,
+			}
+		}
 		default:
 			return state
 	}

@@ -16,6 +16,8 @@ export type Action =
 	| { type: 'SEARCH_BY_NAME'; payload: string; search?: string }
 	| { type: 'SELECT_A_REGION'; payload: string }
 	| { type: 'CHANGE_MODE'; payload?: boolean }
+	| { type: 'OPEN_DROP_DOWN'; payload?: boolean }
+	| { type: 'ClOSE_DROP_DOWN'; payload?: boolean }
 
 export interface CountriesType {
 	alpha2Code: string
@@ -49,4 +51,5 @@ export interface StateType {
 	searchByName: string
 	region: string
 	darkMode: boolean
+	openDropDown: boolean
 }

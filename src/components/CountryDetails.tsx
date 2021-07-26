@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { BsArrowLeft } from 'react-icons/bs'
 
-import { GlobalContext } from '../context/globalState'
+import { GlobalContext, lgViewport } from '../context/globalState'
 import { AppContainer } from '../GlobalStyles'
 import {
 	CountriesType,
@@ -17,20 +17,23 @@ interface capitalType {
 }
 
 const CountryDetailsStyles = styled.div<DarkMode>`
-	display: flex;
-	gap: 10%;
-	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fafafa')};
-
+	font-size: 16px;
+	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#ffffff')};
+	padding-bottom: 120px;
 	img {
 		width: 100%;
 		height: 100%;
+	}
+	@media (min-width: ${lgViewport}) {
+		display: flex;
+		gap: 10%;
 	}
 `
 
 const CountryDetailsContainer = styled.div<DarkMode>`
 	${AppContainer};
-	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fafafa')};
-	height: 100vh;
+	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#ffffff')};
+	height: 100%;
 `
 
 const FlagContainer = styled.div`
@@ -42,26 +45,42 @@ const TextContainer = styled.div`
 `
 
 const TextWrapper = styled.div<DarkMode>`
-	display: flex;
-	align-items: center;
-	gap: 10%;
 	color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
+	padding-top: 25px;
+	span {
+		font-weight: 600;
+	}
+	div {
+		padding-top: 25px;
+	}
+	@media (min-width: ${lgViewport}) {
+		gap: 10%;
+		align-items: center;
+		display: flex;
+	}
 `
 
 const BordersButtonStyles = styled.button<DarkMode>`
 	cursor: pointer;
-	padding: 5px 16px;
 	background-color: #fff;
 	border: none;
-	border-radius: 5px;
+	padding: 8px 16px;
+	border-radius: 2px;
+	color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#fafafa')};
 	cursor: pointer;
 	margin: 5px 5px;
+	box-shadow: 0 0 1px 2px
+		${({ darkMode }) => (darkMode ? '#2B3743' : '#DFDFDF')};
+	@media (min-width: ${lgViewport}) {
+		padding: 8px 16px;
+	}
 `
 
 const CountryName = styled.h3`
 	font-size: 32px;
-	font-weight: 700;
+	font-weight: 800;
+	margin: 0;
 `
 
 export default function CountryDetails() {
@@ -100,22 +119,40 @@ export default function CountryDetails() {
 					<TextWrapper darkMode={darkMode}>
 						<div>
 							<CountryName>{country?.name}</CountryName>
-							<p>Native name: {country?.nativeName}</p>
-							<p>Population: {country?.population}</p>
-							<p>Region: {country?.region}</p>
-							<p>Sub region: {country?.subregion}</p>
-							<p>Capital: {country?.capital}</p>
+							<p>
+								<span>Native name</span>: {country?.nativeName}
+							</p>
+							<p>
+								<span>Population:</span> {country?.population}
+							</p>
+							<p>
+								<span>Region:</span> {country?.region}
+							</p>
+							<p>
+								<span>Sub region:</span> {country?.subregion}
+							</p>
+							<p>
+								<span>Capital:</span> {country?.capital}
+							</p>
 						</div>
 
 						<div>
-							<p>Top level domain: {country?.topLevelDomain}</p>
-							<p>Currencies: {currencies}</p>
-							<p>Languages: {languages}</p>
+							<p>
+								<span>Top level domain:</span> {country?.topLevelDomain}
+							</p>
+							<p>
+								<span>Currencies:</span> {currencies}
+							</p>
+							<p>
+								<span>Languages:</span> {languages}
+							</p>
 						</div>
 					</TextWrapper>
 
 					<TextWrapper darkMode={darkMode}>
-						<p>Border countries: {borders}</p>
+						<p>
+							<span>Border countries:</span> {borders}
+						</p>
 					</TextWrapper>
 				</TextContainer>
 			</CountryDetailsStyles>
@@ -141,11 +178,12 @@ const BackButtonWrapper = styled.div<DarkMode>`
 `
 
 const ButtonStyles = styled.button<DarkMode>`
-	padding: 5px 16px;
-	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fff')};
+	padding: 12px 35px;
+	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#fff')};
 	border: none;
 	border-radius: 5px;
-	box-shadow: 0 0 1px 2px #c1c1cd;
+	box-shadow: 0 0 1px 2px
+		${({ darkMode }) => (darkMode ? '#111518' : '#DFDFDF')};
 	cursor: pointer;
 	margin: 0;
 

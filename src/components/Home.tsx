@@ -13,6 +13,7 @@ const CountryLayout = styled.ul`
 	grid-template-columns: repeat(auto-fill, minmax(263px, 1fr));
 	gap: 70px;
 	padding: 4rem 0;
+	font-size: 1rem;
 `
 
 const LoadingStyles = styled.div`
@@ -31,6 +32,7 @@ const Container = styled.div<DarkMode>`
 const Home = () => {
 	const {
 		state: { countries, isLoading, searchByName, region, darkMode },
+		dispatch,
 	} = useContext(GlobalContext)
 
 	const searchByNameToLowerCase = searchByName.toLowerCase()
@@ -45,7 +47,14 @@ const Home = () => {
 			.map((country, index) => <CountryList country={country} key={index} />)
 
 	return (
-		<Container darkMode={darkMode}>
+		<Container
+			darkMode={darkMode}
+			onClick={() => {
+				console.log('Hello world')
+				dispatch({
+					type: 'CLOSE_DROP_DOWN',
+				})
+			}}>
 			{isLoading ? (
 				<LoadingStyles>
 					<Loader type='Puff' color='#00BFFF' height={100} width={100} />

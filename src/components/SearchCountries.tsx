@@ -2,14 +2,19 @@ import { useContext } from 'react'
 import styled from 'styled-components'
 import { IoSearchSharp } from 'react-icons/io5'
 
-import { GlobalContext } from '../context/globalState'
+import { GlobalContext, lgViewport } from '../context/globalState'
 import Select from './Select'
 import { DarkMode } from '../interfaces'
 
 const InputStyles = styled.input<DarkMode>`
+	@media (max-width: ${lgViewport}) {
+		display: block;
+		padding: 1.4rem 4rem;
+		max-width: 500px;
+	}
 	border: none;
 	padding: 0rem 4rem;
-	box-shadow: 0 0 1px 2px #f4f4f4;
+	box-shadow: 0 0 1px 2px ${({ darkMode }) => (darkMode ? 'none' : '#f4f4f4')};
 	border-radius: 3px;
 	width: 100%;
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
@@ -28,19 +33,18 @@ const SearchContainer = styled.div`
 	display: flex;
 	span {
 		position: absolute;
-		left: 10%;
-		top: 50%;
 		transform: translateY(-40%);
-		@media (min-width: 820px) {
-			left: 5%;
-		}
+		top: 50%;
+		left: 5%;
 	}
 `
 
 const FormStyles = styled.form`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	@media (min-width: ${lgViewport}) {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
 	padding-top: 4rem;
 `
 const SearchCountries = () => {
