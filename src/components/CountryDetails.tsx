@@ -1,87 +1,21 @@
-import { useContext, FC } from 'react'
+import { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import styled from 'styled-components'
-import { BsArrowLeft } from 'react-icons/bs'
+import { BackButton } from './BackButton'
 
-import { GlobalContext, lgViewport } from '../context/globalState'
-import { AppContainer } from '../GlobalStyles'
+import { GlobalContext } from '../context/globalState'
 import {
-	CountriesType,
-	CurrenciesType,
-	LanguagesType,
-	DarkMode,
-} from '../interfaces'
-
+	CountryDetailsStyles,
+	CountryDetailsContainer,
+	FlagContainer,
+	TextContainer,
+	TextWrapper,
+	CountryName,
+	BordersButtonStyles,
+} from '../styles/CountryDetailsStyles'
+import { CountriesType, CurrenciesType, LanguagesType } from '../interfaces'
 interface capitalType {
 	alpha3Code: string
 }
-
-const CountryDetailsStyles = styled.div<DarkMode>`
-	font-size: 16px;
-	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#ffffff')};
-	padding-bottom: 120px;
-	img {
-		width: 100%;
-		height: 100%;
-	}
-	@media (min-width: ${lgViewport}) {
-		display: flex;
-		gap: 10%;
-	}
-`
-
-const CountryDetailsContainer = styled.div<DarkMode>`
-	${AppContainer};
-	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#ffffff')};
-	height: 100%;
-`
-
-const FlagContainer = styled.div`
-	flex-basis: 40%;
-`
-
-const TextContainer = styled.div`
-	flex-basis: 60%;
-`
-
-const TextWrapper = styled.div<DarkMode>`
-	color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
-	padding-top: 25px;
-	span {
-		font-weight: 600;
-	}
-	div {
-		padding-top: 25px;
-	}
-	@media (min-width: ${lgViewport}) {
-		gap: 10%;
-		align-items: center;
-		display: flex;
-	}
-`
-
-const BordersButtonStyles = styled.button<DarkMode>`
-	cursor: pointer;
-	background-color: #fff;
-	border: none;
-	padding: 8px 16px;
-	border-radius: 2px;
-	color: ${({ darkMode }) => (darkMode ? '#fff' : '#111')};
-	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#fafafa')};
-	cursor: pointer;
-	margin: 5px 5px;
-	box-shadow: 0 0 1px 2px
-		${({ darkMode }) => (darkMode ? '#2B3743' : '#DFDFDF')};
-	@media (min-width: ${lgViewport}) {
-		padding: 8px 16px;
-	}
-`
-
-const CountryName = styled.h3`
-	font-size: 32px;
-	font-weight: 800;
-	margin: 0;
-`
 
 export default function CountryDetails() {
 	const { alpha3Code }: capitalType = useParams()
@@ -159,39 +93,3 @@ export default function CountryDetails() {
 		</CountryDetailsContainer>
 	)
 }
-
-const BackButton: FC<DarkMode> = ({ darkMode }) => {
-	return (
-		<BackButtonWrapper darkMode={darkMode}>
-			<ButtonStyles darkMode={darkMode}>
-				<Link to='/'>
-					<BsArrowLeft /> <span>Back</span>
-				</Link>
-			</ButtonStyles>
-		</BackButtonWrapper>
-	)
-}
-
-const BackButtonWrapper = styled.div<DarkMode>`
-	padding: 4rem 0;
-	background-color: ${({ darkMode }) => (darkMode ? '#212E37' : '#fff')};
-`
-
-const ButtonStyles = styled.button<DarkMode>`
-	padding: 12px 35px;
-	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#fff')};
-	border: none;
-	border-radius: 5px;
-	box-shadow: 0 0 1px 2px
-		${({ darkMode }) => (darkMode ? '#111518' : '#DFDFDF')};
-	cursor: pointer;
-	margin: 0;
-
-	a {
-		text-decoration: none;
-		color: ${({ darkMode }) => (darkMode ? '#fff' : '#212E37')};
-		display: flex;
-		align-items: center;
-		gap: 4px;
-	}
-`

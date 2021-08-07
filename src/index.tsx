@@ -4,7 +4,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { ContextProvider } from './context/globalState'
 import { BrowserRouter } from 'react-router-dom'
-import { GlobalStyles } from './GlobalStyles'
+import { GlobalStyles } from './styles/GlobalStyles'
 
 ReactDOM.render(
 	<BrowserRouter>

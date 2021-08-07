@@ -28,7 +28,7 @@ export const GlobalStyles = createGlobalStyle`
 			url('../src/fonts/NunitoSans-800.woff') format('woff'), 
 	}
 
-  body {
+  body, button, span, input, select {
     padding: 0;
     margin: 0;
 		font-family: 'NunitoSans', Arial, Helvetica, sans-serif;

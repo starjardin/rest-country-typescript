@@ -6,7 +6,7 @@ import CountryList from './CountryList'
 import { GlobalContext } from '../context/globalState'
 import SearchCountries from './SearchCountries'
 import { CountriesType, DarkMode } from '../interfaces'
-import { AppContainer } from '../GlobalStyles'
+import { AppContainer } from '../styles/GlobalStyles'
 
 const CountryLayout = styled.ul`
 	display: grid;
@@ -50,7 +50,6 @@ const Home = () => {
 		<Container
 			darkMode={darkMode}
 			onClick={() => {
-				console.log('Hello world')
 				dispatch({
 					type: 'CLOSE_DROP_DOWN',
 				})

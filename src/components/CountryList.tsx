@@ -5,8 +5,7 @@ import { FC, useContext } from 'react'
 import { CountriesType, DarkMode } from '../interfaces'
 import { GlobalContext } from '../context/globalState'
 
-const ListStyles = styled.li<DarkMode>`
-	list-style: none;
+const ListStyles = styled.div<DarkMode>`
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
 	box-shadow: 0 0 3px 2px
 		${({ darkMode }) => (darkMode ? '#2B3743' : '#F3FAFF')};
@@ -18,7 +17,8 @@ const ListStyles = styled.li<DarkMode>`
 		object-fit: cover;
 	}
 `
-const Card = styled.div<DarkMode>`
+const Card = styled.li<DarkMode>`
+	list-style: none;
 	a {
 		text-decoration: none;
 		color: #111518;

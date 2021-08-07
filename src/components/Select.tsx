@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 
 import { GlobalContext } from '../context/globalState'
@@ -7,10 +7,9 @@ import { DarkMode } from '../interfaces'
 
 export default function Select() {
 	const {
-		state: { countries, darkMode, openDropDown },
+		state: { countries, darkMode, openDropDown, region },
 		dispatch,
 	} = useContext(GlobalContext)
-	const [selectedRegion, setSelectedRegion] = useState('')
 	const regions: string[] = Array.from(
 		countries.map((el: { region: string }) => el.region)
 	)
@@ -18,8 +17,7 @@ export default function Select() {
 
 	const toggleOpen = () => dispatch({ type: 'OPEN_DROP_DOWN' })
 
-	function handleCategory(e: any) {
-		setSelectedRegion(e.currentTarget.dataset.value)
+	function handleCategory(e: React.FormEvent<HTMLElement>) {
 		dispatch({
 			type: 'SELECT_A_REGION',
 			payload: e.currentTarget.dataset.value,
@@ -28,8 +26,8 @@ export default function Select() {
 
 	const customSelectTriggerValue = openDropDown
 		? 'Select category'
-		: selectedRegion
-		? selectedRegion
+		: region
+		? region
 		: 'Find a region'
 
 	return (

@@ -1,25 +1,25 @@
 import styled from 'styled-components'
+import { FieldsetProps } from '../interfaces'
+import { lgViewport } from '../context/globalState'
 
 export const DropDown = styled.div`
 	position: relative;
+	width: 100%;
 `
-
-interface FieldsetProps {
-	darkMode: boolean
-	openDropDown: boolean
-}
 
 export const FieldsetStyles = styled.fieldset<FieldsetProps>`
 	border-radius: 5px;
 	border-color: transparent;
 	position: relative;
-	min-width: 200px;
 	background-color: ${({ darkMode }) => (darkMode ? '#2B3743' : '#FFFFFF')};
-	max-width: 436px;
+	box-shadow: 0 0 1px 2px ${({ darkMode }) => (darkMode ? 'none' : '#f4f4f4')};
 	padding: 16px 20px;
+	margin: 16px 0;
 
-	@media (max-width: 820px) {
-		margin: 16px 0;
+	@media (min-width: ${lgViewport}) {
+		max-width: 436px;
+		min-width: 200px;
+		margin: 0;
 	}
 
 	&.focus {

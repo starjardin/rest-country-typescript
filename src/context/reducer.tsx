@@ -34,9 +34,18 @@ export const reducer = (state: StateType, action: Action) => {
 			}
 		}
 		case 'ClOSE_DROP_DOWN': {
+			console.log('ClOSE_DROP_DOWN')
+
 			return {
 				...state,
 				openDropDown: !state.openDropDown,
+			}
+		}
+		case 'RESET_SEARCH': {
+			return {
+				...state,
+				region: '',
+				searchByName: '',
 			}
 		}
 		default:
